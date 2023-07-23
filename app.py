@@ -3,7 +3,7 @@ import openai
 from flask_cors import CORS
 import openai_key
 
-openai.api_key = openai_key.API_KEYAPI_KEY
+openai.api_key = openai_key.API_KEY
 
 app = Flask(__name__)
 CORS(app)
@@ -13,9 +13,7 @@ def generate():
     data = request.get_json()
 
     if 'prompt' not in data:
-        print("break 1", flush=True)
         return jsonify({'error': 'No prompt provided'}), 400
-
 
     try:
 
@@ -26,12 +24,10 @@ def generate():
                    {"role": "user", "content": data['prompt']}
                 ]
         )
-        print("break 2", flush=True)
         print(completion.choices[0].message)
         return jsonify({'response': completion.choices[0].message}), 200
 
     except Exception as e:
-        print("break 3", flush=True)
         return jsonify({'error': str(e)}), 500
 
 if __name__ == "__main__":
