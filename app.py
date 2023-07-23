@@ -20,7 +20,7 @@ def generate():
         completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
-                    {"role": "system", "content": f"you take emails from the user and write them in the appropriate style and length. Style should be {data['style']}. Lenght should be {data['length']}"},
+                    {"role": "system", "content": f"You are an assistant that takes a gist of an email from the user and writes the email (not the reply). Style should be {data['style']}. Lenght should be {data['length']}"},
                    {"role": "user", "content": data['prompt']}
                 ]
         )
